@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#092817">
+  <title data-i18n-title="welcomePageTitle">Welcome to Amharic | Amharic Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='preferences.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
+</head>
+<body class="welcome-body">
+  <div class="welcome-shell">
+    <header class="welcome-header">
+      <div class="welcome-header-inner">
+        <a class="welcome-brand" href="/" aria-label="Amharic Archive home" data-i18n-aria-label="homeLabel">
+          <span class="welcome-brand-mark" aria-hidden="true"><img src="{{ url_for('static', filename='amharic-reading-mark.svg') }}" alt=""></span>
+          <span>Amharic Archive</span>
+        </a>
+        <div class="welcome-header-right">
+          <nav class="welcome-motto" aria-label="Introduction">
+            <span data-i18n="welcomeNavRead">Read</span><i aria-hidden="true"></i>
+            <span data-i18n="welcomeNavUnderstand">Understand</span><i aria-hidden="true"></i>
+            <span data-i18n="welcomeNavConnect">Connect</span>
+          </nav>
+          <div class="preference-controls">
+            <label class="language-control"><span class="visually-hidden" data-i18n="languageLabel">Language</span><select id="language-select" aria-label="Language" data-i18n-aria-label="languageLabel"><option value="en">English</option><option value="am">&#x12A0;&#x121B;&#x122D;&#x129B;</option></select></label>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" data-i18n-aria-label="themeToDark" data-i18n-title="themeToDark"><span aria-hidden="true">&#x263E;</span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="entry-page">
+      <div class="entry-side-script" aria-hidden="true">አማርኛ</div>
+      <section class="welcome-content" aria-labelledby="welcome-title">
+        <div class="welcome-monogram" aria-hidden="true"><img src="{{ url_for('static', filename='amharic-reading-mark.svg') }}" alt=""></div>
+        <p class="welcome-overline" data-i18n="welcomeOverline">SEARCHING SPACE FOR AMHARIC</p>
+        <h1 id="welcome-title"><span data-i18n="welcomeLine">Welcome to</span><strong data-i18n="welcomeLanguage">Amharic Signal</strong></h1>
+        <p class="welcome-description" data-i18n="welcomeDescription">Explore, learn and engage with Amharic through structured reading and meaningful content.</p>
+        <a class="welcome-cta" href="/workbench"><span data-i18n="welcomeGetStarted">Get Started</span><span class="welcome-arrow" aria-hidden="true">→</span></a>
+      </section>
+      <div class="welcome-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+      <footer class="welcome-footer"><span>AMHARIC Archive</span><span data-i18n="welcomeFooter">LANGUAGE · KNOWLEDGE · CONNECTION</span></footer>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='preferences.js') }}"></script>
+</body>
+</html>

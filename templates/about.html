@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="aboutPageTitle">About · Amharic Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='preferences.css') }}">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Amharic Archive home" data-i18n-aria-label="homeLabel">
+        <span class="brand-mark" aria-hidden="true"><img src="{{ url_for('static', filename='amharic-reading-mark.svg') }}" alt=""></span>
+        <span><strong>Amharic Archive</strong><small data-i18n="brandSubtitle">Document intelligence</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation" data-i18n-aria-label="mainNavigation">
+        <a href="/workbench" data-i18n="navWorkbench">Workbench</a>
+        <a href="/about" aria-current="page" data-i18n="navAbout">About</a>
+      </nav>
+      <div class="preference-controls">
+        <label class="language-control"><span class="visually-hidden" data-i18n="languageLabel">Language</span><select id="language-select" aria-label="Language" data-i18n-aria-label="languageLabel"><option value="en">English</option><option value="am">አማርኛ</option></select></label>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" data-i18n-aria-label="themeToDark" data-i18n-title="themeToDark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </header>
+
+    <main class="about-page">
+      <section class="about-intro">
+        <div class="eyebrow"><span data-i18n="aboutEyebrow">SYSTEM GUIDE</span> <span>02</span></div>
+        <h1 data-i18n="aboutTitle">Purpose &amp; field guide</h1>
+        <p class="about-lead" data-i18n="aboutLead">Amharic Archive analyzes an Amharic document and brings its strongest subject signals into view: a primary topic, related subtopics, and keywords ranked by relevance.</p>
+      </section>
+
+      <section class="purpose-band" aria-labelledby="purpose-title">
+        <div class="purpose-label"><span class="kicker" data-i18n="purposeLabel">THE PURPOSE</span><span class="purpose-index">01 / 03</span></div>
+        <div>
+          <h2 id="purpose-title" data-i18n="purposeTitle">Make long text easier to scan.</h2>
+          <p data-i18n="purposeDescription">The system is a document-level NLP workbench. It helps readers, researchers, and reviewers quickly identify what an Amharic passage is mainly about and which terms carry useful subject meaning. Its output is a starting point for review, not a replacement for reading or judgment.</p>
+        </div>
+      </section>
+
+      <section class="guide-section" aria-labelledby="steps-title">
+        <div class="guide-heading">
+          <span class="kicker" data-i18n="howToUse">HOW TO USE IT</span>
+          <h2 id="steps-title" data-i18n="stepsTitle">From text to reviewed signals</h2>
+        </div>
+        <ol class="guide-steps">
+          <li class="guide-step">
+            <span class="step-number">01</span>
+            <h3 data-i18n="stepEnterTitle">Enter a document</h3>
+            <p><span data-i18n="stepEnterDescription">Open Workbench, paste Amharic text into the input area, then choose</span> <strong data-i18n="analyzeDocument">Analyze document</strong><span data-i18n="stepEnterLimit">. The current input limit is</span> {{ "{:,}".format(max_input_chars) }} <span data-i18n="characters">characters.</span></p>
+          </li>
+          <li class="guide-step">
+            <span class="step-number">02</span>
+            <h3 data-i18n="stepResultsTitle">Read the results</h3>
+            <p data-i18n="stepResultsDescription">Check the primary topic, supporting subtopics, and ranked keywords. Relevance indicates the model's ranking signal; review the source text before relying on a prediction.</p>
+          </li>
+          <li class="guide-step">
+            <span class="step-number">03</span>
+            <h3 data-i18n="stepReviewTitle">Review or correct</h3>
+            <p><span data-i18n="stepReviewDescription">Use each</span> <strong data-i18n="review">Review</strong> <span data-i18n="stepReviewDescriptionEnd">control to mark an output right or needing correction. For keywords, click a predicted term to remove or restore it, select other words to add them, or drag across adjacent words to make a phrase.</span></p>
+          </li>
+          <li class="guide-step">
+            <span class="step-number">04</span>
+            <h3 data-i18n="stepApproveTitle">Approve, then save</h3>
+            <p><strong data-i18n="approveAll">Approve all</strong> <span data-i18n="stepApproveDescription">marks the remaining predictions as right while preserving items already marked for correction. Choose</span> <strong data-i18n="saveCorrections">Save corrections</strong> <span data-i18n="stepApproveEnd">to store your reviewed labels.</span></p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="about-columns" aria-label="Results and feedback details" data-i18n-aria-label="resultsFeedbackDetails">
+        <div class="about-detail">
+          <span class="kicker" data-i18n="whatYouGet">WHAT YOU GET</span>
+          <h2 data-i18n="threeViews">Three views of the document</h2>
+          <dl class="signal-list">
+            <div><dt data-i18n="primaryTopicTitle">Primary topic</dt><dd data-i18n="primaryTopicDescription">The main subject predicted for the document.</dd></div>
+            <div><dt data-i18n="subtopics">Subtopics</dt><dd data-i18n="subtopicsDescription">Related themes that add detail to the main subject.</dd></div>
+            <div><dt data-i18n="keywords">Keywords</dt><dd data-i18n="keywordsDescription">Terms and phrases ranked by their relevance to the text.</dd></div>
+          </dl>
+        </div>
+        <div class="about-detail">
+          <span class="kicker" data-i18n="whatSavingDoes">WHAT SAVING DOES</span>
+          <h2 data-i18n="feedbackRetained">Feedback is retained for later use</h2>
+          <p data-i18n="savingDescription">Saved labels are recorded with the analysis in the dashboard database and can inform feedback-aware future analyses. Saving does not immediately retrain the models or change the current result.</p>
+          <a class="about-action" href="/workbench#text-input"><span data-i18n="goWorkbench">Go to the workbench</span> <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <aside class="review-note">
+        <span class="note-mark" aria-hidden="true">!</span>
+        <p><strong data-i18n="keepContext">Keep the document in context.</strong> <span data-i18n="reviewNote">Predictions are automated suggestions. Check names, specialized terminology, and the surrounding passage before using the extracted signals in research or publication.</span></p>
+      </aside>
+    </main>
+
+    <footer><span>AMHARIC Archive</span></footer>
+  </div>
+  <script src="{{ url_for('static', filename='preferences.js') }}"></script>
+</body>
+</html>

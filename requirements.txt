@@ -1,0 +1,12 @@
+fidel-tools
+amharicNLP
+amharic-text-processor
+pandas
+numpy
+scikit-learn
+Flask
+openpyxl
+transformers
+sentence-transformers
+torch
+jupyter

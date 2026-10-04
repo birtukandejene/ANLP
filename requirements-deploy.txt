@@ -1,0 +1,10 @@
+Flask
+gunicorn
+numpy
+scipy
+scikit-learn
+pandas
+openpyxl
+torch
+transformers
+sentence-transformers

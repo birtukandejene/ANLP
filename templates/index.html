@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="pageTitle">Amharic Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='preferences.css') }}">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Amharic Archive home" data-i18n-aria-label="homeLabel">
+        <span class="brand-mark" aria-hidden="true"><img src="{{ url_for('static', filename='amharic-reading-mark.svg') }}" alt=""></span>
+        <span><strong>Amharic Archive</strong><small data-i18n="brandSubtitle">Document intelligence</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation" data-i18n-aria-label="mainNavigation">
+        <a href="/workbench" aria-current="page" data-i18n="navWorkbench">Workbench</a>
+        <a href="/about" data-i18n="navAbout">About</a>
+      </nav>
+      <div class="preference-controls">
+        <label class="language-control"><span class="visually-hidden" data-i18n="languageLabel">Language</span><select id="language-select" aria-label="Language" data-i18n-aria-label="languageLabel"><option value="en">English</option><option value="am">&#x12A0;&#x121B;&#x122D;&#x129B;</option></select></label>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" data-i18n-aria-label="themeToDark" data-i18n-title="themeToDark"><span aria-hidden="true">&#x263E;</span></button>
+      </div>
+    </header>
+
+    <main class="workbench-page">
+      <section class="intro">
+        <div class="eyebrow"><span data-i18n="workbenchEyebrow">AMHARIC NLP WORKBENCH</span> <span>01</span></div>
+        <h1><span data-i18n="amharicHeading">AMHARIC</span><br></h1>
+        <h2><em data-i18n="heroTitle">KeyWord And Topic Extraction.</em></h2>
+        <p data-i18n="heroDescription">Turn an Amharic document into a structured reading: topic hierarchy and relevance-ranked keywords.</p>
+      </section>
+
+      <section class="workspace">
+        <div class="input-panel panel">
+          <div class="panel-head"><div><span class="kicker" data-i18n="inputDocument">INPUT DOCUMENT</span><h2 data-i18n="readingPrompt">What are you reading?</h2></div><span class="counter" id="char-count">0 / {{ max_input_chars }}</span></div>
+          <textarea id="text-input" maxlength="{{ max_input_chars }}" placeholder="የአማርኛ ጽሑፍዎን እዚህ ያስገቡ..." data-i18n-placeholder="inputPlaceholder" spellcheck="false"></textarea>
+          <div class="input-foot"><span class="hint" data-i18n="inputHint">Amharic text only · document-level analysis</span><button class="primary-button" id="analyze-button" aria-label="Analyze document" data-i18n-aria-label="analyzeDocument"><span class="button-label" data-i18n="analyzeDocument">Analyze document</span><span class="button-arrow" aria-hidden="true">↗</span></button></div>
+          <div class="error-box" id="error-box" hidden></div>
+        </div>
+        <aside class="quick-panel">
+          <span class="kicker" data-i18n="quickStart">QUICK START</span>
+          <p data-i18n="quickStartDescription">Paste a paragraph, news item, report, or research excerpt. The system keeps the document intact while extracting its strongest signals.</p>
+          <button class="text-button" id="sample-button"><span data-i18n="loadSample">Load a sample</span> <span aria-hidden="true">→</span></button>
+          <div class="rule"></div>
+          <div class="fact"><span data-i18n="languageGate">LANGUAGE GATE</span><strong data-i18n="amharicFirst">Amharic-first</strong></div>
+          <div class="fact"><span data-i18n="outputLabel">OUTPUT</span><strong data-i18n="topicsKeywords">Topics + keywords</strong></div>
+        </aside>
+      </section>
+
+      <section class="results-section" id="results-section" hidden>
+        <div class="section-heading"><div><span class="kicker" data-i18n="analysisResult">ANALYSIS RESULT</span><h2 data-i18n="documentSignals">Document Archive</h2></div><span class="analysis-id" id="analysis-id"></span></div>
+        <div class="result-grid">
+          <article class="topic-card panel"><div class="card-label" data-i18n="primaryTopic">PRIMARY TOPIC</div><div class="main-topic" id="main-topic">—</div><div class="subtopic-head"><span data-i18n="subtopics">SUBTOPICS</span><span data-i18n="relevance">RELEVANCE</span></div><div id="subtopics" class="subtopics"></div></article>
+          <article class="keyword-card panel"><div class="card-label"><span data-i18n="extractedKeywords">EXTRACTED KEYWORDS</span> <span data-i18n="rankedByRelevance">RANKED BY RELEVANCE</span></div><div id="keywords" class="keywords"></div></article>
+        </div>
+        <div class="feedback-row"><span data-i18n="reviewIndependently">Review each output independently.</span><button class="feedback-button feedback-button-secondary" id="useful-all-button" data-i18n="approveAll">Approve all</button><button class="feedback-button" id="save-feedback-button" data-i18n="saveCorrections">Save corrections</button><span id="feedback-state" aria-live="polite"></span></div>
+        <div class="correction-panel panel" id="correction-panel" hidden>
+          <div class="panel-head"><div><span class="kicker" data-i18n="correction">CORRECTION</span><h2 id="correction-title" data-i18n="reviewPrediction">Review prediction</h2></div><button class="text-button" id="close-correction-button"><span data-i18n="close">Close</span> <span aria-hidden="true">×</span></button></div>
+          <div id="correction-content"></div>
+          <button class="feedback-button" id="approve-correction-button" data-i18n="approveCorrection">Approve correction</button>
+        </div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-heading"><div><span class="kicker" data-i18n="localMemory">LOCAL MEMORY</span><h2 data-i18n="recentAnalyses">Recent analyses</h2></div><button class="text-button" id="refresh-history"><span data-i18n="refresh">Refresh</span> <span aria-hidden="true">↻</span></button></div>
+        <div id="history-list" class="history-list"><div class="history-empty" data-i18n="recentEmpty">Your recent documents will appear here.</div></div>
+      </section>
+    </main>
+    <footer><span>AMHARIC Archive</span></footer>
+  </div>
+  <script>window.MAX_INPUT_CHARS = { max_input_chars };</script>
+  <script src="{{ url_for('static', filename='preferences.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
