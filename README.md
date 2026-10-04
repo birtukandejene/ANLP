@@ -1,4 +1,4 @@
-# Amharic Archive: Project Documentation
+# ANLP: Amharic Natural Language Processing
 
 Amharic Archive is a Flask-based workbench for analyzing Amharic documents. It combines an open-topic semantic topic system, a supervised subtopic component, semantic keyword extraction, a language gate, persistent analysis history, and feedback-aware ranking.
 
